@@ -1,4 +1,4 @@
-package sum;
+package data_structure;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
