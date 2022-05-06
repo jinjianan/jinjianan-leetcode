@@ -1,39 +1,37 @@
-package data_structure;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
  * 225. 用队列实现栈
  * <a href="https://leetcode-cn.com/problems/implement-stack-using-queues/">题目链接</a>
- * 1个队列
- * push O(1)  pop O(n)  top O(1)
+ *
+ * push O(n)  pop O(1)  top O(1)
  */
-public class $225_3 {
+public class $225_1 {
 
     Deque<Integer> q;
 
-    int front;
-
-    public $225_3() {
+    public $225_1() {
         q = new ArrayDeque<>();
     }
 
     public void push(int x) {
+        Deque<Integer> q2 = new ArrayDeque<>();
+        while (!q.isEmpty()){
+            q2.offer(q.poll());
+        }
         q.offer(x);
-        front = x;
+        while (!q2.isEmpty()){
+            q.offer(q2.poll());
+        }
     }
 
     public int pop() {
-        for (int i = q.size(); i > 1; i--) {
-            front = q.peek();
-            q.offer(q.poll());
-        }
         return q.poll();
     }
 
     public int top() {
-        return front;
+        return q.peek();
     }
 
     public boolean empty() {

@@ -1,5 +1,3 @@
-package data_structure;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -9,34 +7,30 @@ import java.util.Deque;
  * <p>
  *
  */
-public class $232_1 {
+public class $232_2 {
 
     Deque<Integer> stack1;
     int front;
 
-    public $232_1() {
+    public $232_2() {
         stack1 = new ArrayDeque<>();
     }
 
     public void push(int x) {
-        if (stack1.isEmpty()) front = x;
+        Deque<Integer> stack2 = new ArrayDeque<>();
+        while (!stack1.isEmpty())
+            stack2.push(stack1.pop());
         stack1.push(x);
+        while (!stack2.isEmpty())
+            stack1.push(stack2.pop());
     }
 
     public int pop() {
-        Deque<Integer> stack2 = new ArrayDeque<>();
-        while (stack1.size() > 1){
-            front = stack1.peek();
-            stack2.push(stack1.pop());
-        }
-        int r = stack1.pop();
-        while (!stack2.isEmpty())
-            stack1.push(stack2.pop());
-        return r;
+        return stack1.pop();
     }
 
     public int peek() {
-        return front;
+        return stack1.peek();
     }
 
     public boolean empty() {

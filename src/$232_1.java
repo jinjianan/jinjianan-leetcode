@@ -1,23 +1,19 @@
-package data_structure;
-
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
  * 232. 用栈实现队列
  * <a href="https://leetcode-cn.com/problems/implement-queue-using-stacks/">题目链接</a>
+ * <p>
  *
- * 均摊为全 O(1)
  */
-public class $232 {
+public class $232_1 {
 
     Deque<Integer> stack1;
-    Deque<Integer> stack2;
     int front;
 
-    public $232() {
+    public $232_1() {
         stack1 = new ArrayDeque<>();
-        stack2 = new ArrayDeque<>();
     }
 
     public void push(int x) {
@@ -26,23 +22,23 @@ public class $232 {
     }
 
     public int pop() {
-        if(!stack2.isEmpty())
-            return stack2.pop();
-
-        while(stack1.size() > 1)
+        Deque<Integer> stack2 = new ArrayDeque<>();
+        while (stack1.size() > 1){
+            front = stack1.peek();
             stack2.push(stack1.pop());
-
-        return stack1.pop();
+        }
+        int r = stack1.pop();
+        while (!stack2.isEmpty())
+            stack1.push(stack2.pop());
+        return r;
     }
 
     public int peek() {
-        if (stack2.isEmpty())
-            return front;
-        return stack2.peek();
+        return front;
     }
 
     public boolean empty() {
-        return stack1.isEmpty() && stack2.isEmpty();
+        return stack1.isEmpty();
     }
 
 
