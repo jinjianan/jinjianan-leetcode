@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * 88. 合并两个有序数组
  */
@@ -26,14 +28,15 @@ public class $88 {
         int p1 = m - 1, p2 = n - 1;
         for (int k = m + n - 1; k >= 0; k--) {
             if (p1 < 0)
-                nums1[k] = nums2[p2--];
+                System.arraycopy(nums2,0,nums1,0,k+1);
             else if (p2 < 0)
-                nums1[k] = nums1[p1--];
+                break;
             else if (nums1[p1] > nums2[p2])
                 nums1[k] = nums1[p1--];
             else
                 nums1[k] = nums2[p2--];
         }
     }
+
 
 }
