@@ -10,27 +10,41 @@ public class $Offer35 {
 
     public Node copyRandomList(Node head) {
         Node ocur = head;
-        Map<Node,Integer> map = new HashMap<>();
-        List<Node> list = new ArrayList<>();
+        Map<Node, Node> map = new HashMap<>();
         Node newHead = new Node(-1);
         Node cur = newHead;
-        int i= 0;
-        while (ocur != null){
+        while (ocur != null) {
             cur.next = new Node(ocur.val);
             cur = cur.next;
-            list.add(cur);
-            map.put(ocur,i++);
+            map.put(ocur, cur);
             ocur = ocur.next;
         }
 
         ocur = head;
-        i = 0;
-        while (ocur!=null){
+        cur = newHead.next;
+        while (ocur != null && cur != null) {
             if (ocur.random != null)
-                list.get(i++).random = list.get(map.get(ocur.random));
+                cur.random = map.get(ocur.random);
             ocur = ocur.next;
+            cur = cur.next;
         }
         return newHead.next;
+    }
+
+
+    public Node copyRandomList1(Node head) {
+        Map<Node, Node> map = new HashMap<>();
+        return f(head, map);
+    }
+
+    private Node f(Node head, Map<Node, Node> map) {
+        if (head == null) return null;
+        if (map.containsKey(head)) return map.get(head);
+        Node newNode = new Node(head.val);
+        map.put(head, newNode);
+        newNode.next = f(head.next, map);
+        newNode.random = f(head.random, map);
+        return newNode;
     }
 
     class Node {
