@@ -2,7 +2,7 @@
  * 21. 合并两个有序链表
  */
 public class $21 {
-    class ListNode {
+    private class ListNode {
         int val;
         ListNode next;
 
@@ -39,6 +39,22 @@ public class $21 {
             cur = cur.next;
         }
         return r.next;
+    }
+
+    public ListNode mergeTwoLists1(ListNode list1, ListNode list2) {
+        ListNode newNode;
+        if (list1 == null)
+            return list2;
+        else if (list2 == null)
+            return list1;
+        else if (list1.val > list2.val) {
+            newNode = new ListNode(list2.val);
+            newNode.next = mergeTwoLists1(list2.next, list1);
+        } else {
+            newNode = new ListNode(list1.val);
+            newNode.next = mergeTwoLists1(list2, list1.next);
+        }
+        return newNode;
     }
 
 }

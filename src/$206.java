@@ -50,31 +50,5 @@ public class $206 {
             this.val = val;
             this.next = next;
         }
-
-        ListNode(int[] arr) {
-            if (arr.length < 1) throw new IllegalArgumentException("长度不对");
-            ListNode dummyHead = new ListNode(-1);
-            ListNode prev = dummyHead;
-            for (var i : arr) {
-                prev.next = new ListNode(i);
-                prev = prev.next;
-            }
-            this.val = dummyHead.next.val;
-            this.next = dummyHead.next.next;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder res = new StringBuilder();
-            res.append("[");
-            ListNode cur = this;
-            while (cur != null) {
-                res.append(cur.val);
-                cur = cur.next;
-                if (cur != null) res.append(",");
-            }
-            res.append("]");
-            return res.toString();
-        }
     }
 }
