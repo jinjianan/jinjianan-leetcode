@@ -1,5 +1,4 @@
 /**
- * TODO
  * 33. 搜索旋转排序数组
  */
 public class $33 {
@@ -22,7 +21,20 @@ public class $33 {
     // 1 2 3 4 5 6
     // 5 6 1 2 3 4
     public static int search1(int[] nums, int target) {
-        return 1;
+        int lb = nums[0], rb = nums[nums.length - 1];
+        int l = 0, r = nums.length - 1;
+        while (l <= r) {
+            int mid = (r - l) / 2 + l;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] > target) {
+              if (target < lb && nums[mid] >= lb) l = mid +1;
+              else r = mid - 1;
+            } else {
+                if (target >= lb && nums[mid] < lb) r = mid -1;
+                else l = mid + 1;
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
