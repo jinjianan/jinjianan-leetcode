@@ -16,46 +16,29 @@ public class $94 {
 
     private void inorderTraversal(TreeNode node, List<Integer> list) {
         if (node == null) return;
-        if (node.left != null)
-            inorderTraversal(node.left, list);
+        inorderTraversal(node.left, list);
         list.add(node.val);
-        if (node.right != null)
-            inorderTraversal(node.right, list);
+        inorderTraversal(node.right, list);
     }
 
-    public List<Integer> inorderTraversal1(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        if (root == null) return list;
-        TreeNode cur = root;
-        while (!stack.isEmpty()) {
-            while (cur != null){
-                stack.push(cur);
-                cur = cur.left;
-            }
-            cur = stack.pop();
-            list.add(cur.val);
-            cur = cur.right;
+
+    private class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
         }
-        return list;
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
 }
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode() {
-    }
-
-    TreeNode(int val) {
-        this.val = val;
-    }
-
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
-}
