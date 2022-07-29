@@ -7,7 +7,6 @@ import java.util.Map;
  * 496. 下一个更大元素 I
  */
 public class $496 {
-
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         for (int i = 0; i < nums1.length; i++) {
             boolean flag = false;
@@ -28,6 +27,23 @@ public class $496 {
 
     // 1 3 4 2  top
     public int[] nextGreaterElement1(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> map = new HashMap<>();
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && nums2[i] > stack.peek())
+                stack.pop();
+            map.put(nums2[i], stack.isEmpty() ? -1 : stack.peek());
+            stack.push(nums2[i]);
+        }
+
+        for (int i = 0; i < nums1.length; i++)
+            nums1[i] = map.getOrDefault(nums1[i], -1);
+
+        return nums1;
+    }
+
+
+    public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = nums2.length - 1; i >= 0; i--) {

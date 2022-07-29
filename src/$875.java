@@ -1,13 +1,16 @@
 import java.util.Arrays;
+
 /**
  * 875. 爱吃香蕉的珂珂
  */
 public class $875 {
 
     public int minEatingSpeed(int[] piles, int h) {
-        Arrays.sort(piles);
+        int max = 0;
+        for (var p : piles)
+            max = Math.max(max, p);
         int l = 1;
-        int r = piles[piles.length - 1];
+        int r = max;
         while (l < r) {
             int mid = (r - l) / 2 + l;
             if (eatingTime(piles, mid) <= h) r = mid;
